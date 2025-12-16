@@ -1,165 +1,90 @@
+// ========== GSAP INITIALIZATION ==========
+gsap.registerPlugin(ScrollTrigger);
+
+// ========== SECTION NAVIGATION ==========
+const sections = document.querySelectorAll('.section');
+const navLinks = document.querySelectorAll('.nav-link');
+
+function showSection(sectionId) {
+    sections.forEach(section => {
+        section.classList.remove('active-section');
+    });
+    
+    const targetSection = document.getElementById(sectionId);
+    if (targetSection) {
+        targetSection.classList.add('active-section');
+        
+        // Animate section entrance
+        gsap.from(targetSection.children, {
+            opacity: 0,
+            y: 50,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: 'power3.out'
+        });
+    }
+    
+    // Update active nav link
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('data-section') === sectionId) {
+            link.classList.add('active');
+        }
+    });
+}
+
+navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const sectionId = link.getAttribute('data-section');
+        showSection(sectionId);
+        
+        // Close mobile menu if open
+        navMenu.classList.remove('active');
+        mobileToggle.classList.remove('active');
+    });
+});
+
 // ========== MOBILE MENU TOGGLE ==========
-const mobileToggle = document.querySelector('.mobile-toggle');
-const navMenu = document.querySelector('.nav-menu');
+const mobileToggle = document.getElementById('mobileToggle');
+const navMenu = document.getElementById('navMenu');
 
 mobileToggle.addEventListener('click', () => {
     mobileToggle.classList.toggle('active');
     navMenu.classList.toggle('active');
 });
 
-// Close menu when clicking outside
+// Close mobile menu when clicking outside
 document.addEventListener('click', (e) => {
-    if (!navMenu.contains(e.target) && !mobileToggle.contains(e.target)) {
+    if (!e.target.closest('.nav-wrapper')) {
         navMenu.classList.remove('active');
         mobileToggle.classList.remove('active');
     }
 });
 
-// ========== NAVIGATION & SECTION SWITCHING ==========
-const navLinks = document.querySelectorAll('.nav-link');
-const sections = document.querySelectorAll('.section');
-const logo = document.querySelector('.logo');
-
-// Function to show specific section
-function showSection(sectionId) {
-    // Hide all sections
-    sections.forEach(section => {
-        section.classList.add('hidden');
-    });
-    
-    // Show target section
-    const targetSection = document.getElementById(sectionId);
-    if (targetSection) {
-        targetSection.classList.remove('hidden');
-        
-        // Scroll to top
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-    
-    // Update active nav link
-    navLinks.forEach(link => link.classList.remove('active'));
-    const activeLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
-    if (activeLink) {
-        activeLink.classList.add('active');
-    }
-    
-    // Close mobile menu
-    navMenu.classList.remove('active');
-    mobileToggle.classList.remove('active');
-}
-
-// Navigation click handlers
-navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const targetId = link.getAttribute('href').substring(1);
-        showSection(targetId);
-    });
-});
-
-// Logo click - go to home
-logo.addEventListener('click', () => {
-    showSection('home');
-});
-
-// Button clicks for navigation
-document.querySelectorAll('.btn-explore, .btn-contact').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const targetId = btn.getAttribute('href').substring(1);
-        showSection(targetId);
-    });
-});
-
-// Footer navigation links
-document.querySelectorAll('.footer-section a[href^="#"]').forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const targetId = link.getAttribute('href').substring(1);
-        showSection(targetId);
-    });
-});
-
-// Initialize: Show only home section on page load
-window.addEventListener('DOMContentLoaded', () => {
-    sections.forEach(section => {
-        if (section.id !== 'home') {
-            section.classList.add('hidden');
-        } else {
-            section.classList.remove('hidden');
-        }
-    });
-    
-    // Set home nav link as active
-    navLinks.forEach(link => {
-        if (link.getAttribute('href') === '#home') {
-            link.classList.add('active');
-        } else {
-            link.classList.remove('active');
-        }
-    });
-});
-
-// ========== HEADER SCROLL EFFECTS ==========
-const topBar = document.querySelector('.top-bar');
-const navbar = document.querySelector('.navbar');
+// ========== HIDE TOP BAR ON SCROLL ==========
+const topBar = document.getElementById('topBar');
+const navbar = document.getElementById('navbar');
+let lastScrollTop = 0;
 
 window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
-    // Hide top bar on scroll
-    if (currentScroll > 50) {
+    if (scrollTop > 50) {
         topBar.classList.add('hidden');
-    } else {
-        topBar.classList.remove('hidden');
-    }
-    
-    // Add shadow to navbar
-    if (currentScroll > 100) {
         navbar.classList.add('scrolled');
     } else {
+        topBar.classList.remove('hidden');
         navbar.classList.remove('scrolled');
     }
+    
+    lastScrollTop = scrollTop;
 });
 
-// ========== PRODUCT CATEGORY FILTER ==========
-const categoryButtons = document.querySelectorAll('.category-btn');
-const productCards = document.querySelectorAll('.product-card');
+// ========== DROPDOWN MENU FOR PRODUCTS ==========
+const dropdownLinks = document.querySelectorAll('.dropdown-menu a');
 
-categoryButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        // Remove active class from all buttons
-        categoryButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-        
-        const category = button.getAttribute('data-category');
-        
-        // Filter products
-        productCards.forEach(card => {
-            const cardCategory = card.getAttribute('data-category');
-            
-            if (category === 'all' || cardCategory === category) {
-                card.classList.remove('hidden');
-                card.style.opacity = '0';
-                setTimeout(() => {
-                    card.style.transition = 'opacity 0.4s ease';
-                    card.style.opacity = '1';
-                }, 10);
-            } else {
-                card.style.opacity = '0';
-                setTimeout(() => {
-                    card.classList.add('hidden');
-                }, 300);
-            }
-        });
-    });
-});
-
-// Product category filter from dropdown menu
-document.querySelectorAll('.dropdown-menu a[data-category]').forEach(link => {
+dropdownLinks.forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
         const category = link.getAttribute('data-category');
@@ -169,43 +94,192 @@ document.querySelectorAll('.dropdown-menu a[data-category]').forEach(link => {
         
         // Filter products after a short delay
         setTimeout(() => {
-            const targetButton = document.querySelector(`.category-btn[data-category="${category}"]`);
-            if (targetButton) {
-                targetButton.click();
-            }
+            filterProducts(category);
         }, 300);
     });
 });
 
-// ========== MOBILE DROPDOWN TOGGLE ==========
-if (window.innerWidth <= 768) {
-    document.querySelectorAll('.dropdown > .nav-link').forEach(link => {
-        link.addEventListener('click', (e) => {
-            if (window.innerWidth <= 768) {
-                e.preventDefault();
-                const dropdown = link.parentElement;
-                dropdown.classList.toggle('active');
-            }
-        });
+// ========== PRODUCT FILTER ==========
+const categoryButtons = document.querySelectorAll('.category-btn');
+const productCards = document.querySelectorAll('.product-card');
+
+function filterProducts(category) {
+    // Update active button
+    categoryButtons.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('data-category') === category) {
+            btn.classList.add('active');
+        }
+    });
+    
+    // Filter and animate products
+    productCards.forEach((card, index) => {
+        const cardCategory = card.getAttribute('data-category');
+        
+        if (category === 'all' || cardCategory === category) {
+            gsap.to(card, {
+                opacity: 1,
+                scale: 1,
+                display: 'block',
+                duration: 0.5,
+                delay: index * 0.1,
+                ease: 'power2.out'
+            });
+        } else {
+            gsap.to(card, {
+                opacity: 0,
+                scale: 0.8,
+                duration: 0.3,
+                onComplete: () => {
+                    card.style.display = 'none';
+                }
+            });
+        }
     });
 }
 
-// ========== SCROLL TO TOP BUTTON ==========
-const scrollTopBtn = document.getElementById('scrollTop');
-
-window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 300) {
-        scrollTopBtn.classList.add('visible');
-    } else {
-        scrollTopBtn.classList.remove('visible');
-    }
+categoryButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const category = button.getAttribute('data-category');
+        filterProducts(category);
+    });
 });
 
-scrollTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+// ========== SCROLL ANIMATIONS WITH GSAP ==========
+// Hero animations
+gsap.from('.hero-logo', {
+    scale: 0,
+    duration: 1,
+    ease: 'back.out(1.7)',
+    delay: 0.3
+});
+
+gsap.from('.hero-title', {
+    opacity: 0,
+    y: 50,
+    duration: 1,
+    delay: 0.6
+});
+
+gsap.from('.hero-divider', {
+    width: 0,
+    duration: 0.8,
+    delay: 0.9
+});
+
+gsap.from('.hero-subtitle', {
+    opacity: 0,
+    y: 30,
+    duration: 0.8,
+    delay: 1.1
+});
+
+gsap.from('.hero-description', {
+    opacity: 0,
+    y: 30,
+    duration: 0.8,
+    delay: 1.3
+});
+
+gsap.from('.hero-buttons .btn', {
+    opacity: 0,
+    y: 30,
+    duration: 0.8,
+    stagger: 0.2,
+    delay: 1.5
+});
+
+gsap.from('.hero-features .feature-item', {
+    opacity: 0,
+    y: 50,
+    duration: 0.8,
+    stagger: 0.2,
+    delay: 1.8
+});
+
+// About section animations
+gsap.utils.toArray('.about-grid, .founder-card, .company-details').forEach(elem => {
+    gsap.from(elem, {
+        scrollTrigger: {
+            trigger: elem,
+            start: 'top 80%',
+            toggleActions: 'play none none reverse'
+        },
+        opacity: 0,
+        y: 100,
+        duration: 1,
+        ease: 'power3.out'
     });
+});
+
+// Highlight cards stagger animation
+gsap.from('.highlight-card', {
+    scrollTrigger: {
+        trigger: '.about-highlights',
+        start: 'top 80%'
+    },
+    opacity: 0,
+    x: -50,
+    duration: 0.8,
+    stagger: 0.2
+});
+
+// Product cards animation
+gsap.from('.product-card', {
+    scrollTrigger: {
+        trigger: '.products-grid',
+        start: 'top 80%'
+    },
+    opacity: 0,
+    y: 50,
+    duration: 0.6,
+    stagger: 0.1
+});
+
+// Contact cards animation
+gsap.from('.info-card', {
+    scrollTrigger: {
+        trigger: '.contact-info-cards',
+        start: 'top 80%'
+    },
+    opacity: 0,
+    x: -50,
+    duration: 0.8,
+    stagger: 0.2
+});
+
+// ========== PARALLAX EFFECT ==========
+gsap.to('.hero-bg-image', {
+    scrollTrigger: {
+        trigger: '.hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true
+    },
+    y: 300,
+    opacity: 0
+});
+
+// About image parallax
+gsap.to('.about-main-image', {
+    scrollTrigger: {
+        trigger: '.about-image-wrapper',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true
+    },
+    y: 100
+});
+
+// Founder image parallax
+gsap.to('.founder-image img', {
+    scrollTrigger: {
+        trigger: '.founder-card',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true
+    },
+    y: 50
 });
 
 // ========== CONTACT FORM SUBMISSION ==========
@@ -218,157 +292,147 @@ contactForm.addEventListener('submit', (e) => {
     const formData = new FormData(contactForm);
     const data = Object.fromEntries(formData);
     
-    // Show loading state
-    const submitBtn = contactForm.querySelector('.btn-submit');
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-    submitBtn.disabled = true;
+    // Create WhatsApp message
+    const message = `Hello! I'm interested in your products.
+
+Name: ${data.name}
+Email: ${data.email}
+Phone: ${data.phone}
+Company: ${data.company || 'N/A'}
+Product Interest: ${data.product}
+
+Message: ${data.message}`;
     
-    // Simulate form submission
-    setTimeout(() => {
-        // Show success message
-        alert('Thank you for your inquiry! We will get back to you soon.');
-        
-        // Reset form
-        contactForm.reset();
-        
-        // Reset button
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-        
-        // In production, send data to server
-        console.log('Form submitted with data:', data);
-    }, 1500);
+    const whatsappUrl = `https://wa.me/918087227973?text=${encodeURIComponent(message)}`;
+    
+    // Open WhatsApp
+    window.open(whatsappUrl, '_blank');
+    
+    // Show success message
+    gsap.to('.contact-form-wrapper', {
+        scale: 0.95,
+        duration: 0.2,
+        yoyo: true,
+        repeat: 1
+    });
+    
+    alert('Thank you! Redirecting you to WhatsApp...');
+    
+    // Reset form
+    contactForm.reset();
 });
 
 // ========== FORM INPUT ANIMATIONS ==========
 const formInputs = document.querySelectorAll('.form-group input, .form-group textarea, .form-group select');
 
 formInputs.forEach(input => {
-    // Add placeholder for label animation
     if (!input.hasAttribute('placeholder')) {
         input.setAttribute('placeholder', ' ');
     }
     
-    // Focus effects
     input.addEventListener('focus', function() {
-        this.parentElement.style.transform = 'scale(1.02)';
+        gsap.to(this.parentElement, {
+            scale: 1.02,
+            duration: 0.3
+        });
     });
     
     input.addEventListener('blur', function() {
-        this.parentElement.style.transform = 'scale(1)';
+        gsap.to(this.parentElement, {
+            scale: 1,
+            duration: 0.3
+        });
     });
 });
 
-// ========== SMOOTH HOVER EFFECTS FOR CARDS ==========
-// Product cards hover
-productCards.forEach(card => {
-    card.addEventListener('mouseenter', () => {
-        card.style.transform = 'translateY(-10px)';
-        card.style.boxShadow = '0 20px 60px rgba(0, 0, 0, 0.3)';
-    });
-    
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = 'translateY(0)';
-        card.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-    });
+// ========== SCROLL TO TOP BUTTON ==========
+const scrollTopBtn = document.getElementById('scrollTop');
+
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+        gsap.to(scrollTopBtn, {
+            opacity: 1,
+            visibility: 'visible',
+            duration: 0.3
+        });
+    } else {
+        gsap.to(scrollTopBtn, {
+            opacity: 0,
+            visibility: 'hidden',
+            duration: 0.3
+        });
+    }
 });
 
-// Info cards hover
-document.querySelectorAll('.info-card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-        card.style.transform = 'translateX(10px)';
-    });
-    
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = 'translateX(0)';
-    });
-});
-
-// Highlight cards hover
-document.querySelectorAll('.highlight-card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-        card.style.transform = 'translateX(10px)';
-    });
-    
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = 'translateX(0)';
-    });
-});
-
-// Detail cards hover
-document.querySelectorAll('.detail-card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-        card.style.transform = 'translateY(-5px)';
-    });
-    
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = 'translateY(0)';
+scrollTopBtn.addEventListener('click', () => {
+    showSection('home');
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
     });
 });
 
 // ========== BUTTON HOVER EFFECTS ==========
-const buttons = document.querySelectorAll('.btn, .category-btn');
+const buttons = document.querySelectorAll('.btn, .category-btn, .btn-enquiry');
 
-buttons.forEach(button => {
-    button.addEventListener('mouseenter', () => {
-        button.style.transform = 'translateY(-2px) scale(1.02)';
+buttons.forEach(btn => {
+    btn.addEventListener('mouseenter', function() {
+        gsap.to(this, {
+            scale: 1.05,
+            duration: 0.3,
+            ease: 'power2.out'
+        });
     });
     
-    button.addEventListener('mouseleave', () => {
-        button.style.transform = 'translateY(0) scale(1)';
+    btn.addEventListener('mouseleave', function() {
+        gsap.to(this, {
+            scale: 1,
+            duration: 0.3,
+            ease: 'power2.out'
+        });
     });
 });
 
-// ========== INTERSECTION OBSERVER FOR FADE-IN ANIMATIONS ==========
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
+// ========== CARD HOVER ANIMATIONS ==========
+const cards = document.querySelectorAll('.product-card, .info-card, .detail-card, .highlight-card');
 
-const fadeInObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
+cards.forEach(card => {
+    card.addEventListener('mouseenter', function() {
+        gsap.to(this, {
+            y: -10,
+            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.2)',
+            duration: 0.3
+        });
     });
-}, observerOptions);
-
-// Observe elements for fade-in animation
-document.querySelectorAll('.section-header, .about-grid, .founder-card, .company-details').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-    fadeInObserver.observe(el);
+    
+    card.addEventListener('mouseleave', function() {
+        gsap.to(this, {
+            y: 0,
+            boxShadow: '0 5px 20px rgba(0, 0, 0, 0.15)',
+            duration: 0.3
+        });
+    });
 });
 
-// ========== WINDOW RESIZE HANDLER ==========
-let resizeTimeout;
-window.addEventListener('resize', () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-        // Reset mobile menu on resize to desktop
-        if (window.innerWidth > 768) {
-            navMenu.classList.remove('active');
-            mobileToggle.classList.remove('active');
-            
-            // Reset dropdown displays
-            document.querySelectorAll('.dropdown').forEach(dropdown => {
-                dropdown.classList.remove('active');
-            });
-        }
-    }, 250);
-});
-
-// ========== ACCESSIBILITY: KEYBOARD NAVIGATION ==========
-buttons.forEach(button => {
-    button.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            button.click();
-        }
+// ========== COUNTER ANIMATION ==========
+function animateCounter(element, target) {
+    gsap.to(element, {
+        innerHTML: target,
+        duration: 2,
+        snap: { innerHTML: 1 },
+        ease: 'power1.out'
     });
+}
+
+// ========== LOADING ANIMATION ==========
+window.addEventListener('load', () => {
+    gsap.from('body', {
+        opacity: 0,
+        duration: 0.5
+    });
+    
+    // Show home section by default
+    showSection('home');
 });
 
 // ========== PREVENT FORM RESUBMISSION ==========
@@ -376,73 +440,108 @@ if (window.history.replaceState) {
     window.history.replaceState(null, null, window.location.href);
 }
 
-// ========== PAGE LOAD ANIMATION ==========
-window.addEventListener('load', () => {
-    document.body.style.opacity = '1';
-    
-    // Animate hero elements on page load
-    const heroElements = document.querySelectorAll('.hero-logo, .hero-title, .hero-divider, .hero-subtitle, .hero-description, .hero-buttons, .hero-features');
-    
-    heroElements.forEach((el, index) => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        
-        setTimeout(() => {
-            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-            el.style.opacity = '1';
-            el.style.transform = 'translateY(0)';
-        }, 100 * (index + 1));
-    });
-});
-
-// Set initial body opacity
-document.body.style.opacity = '0';
-document.body.style.transition = 'opacity 0.5s ease';
-
-// ========== CONSOLE BRANDING ==========
-console.log('%c🌾 Merava Global', 'font-size: 24px; font-weight: bold; color: #c9a961; font-family: Playfair Display;');
-console.log('%cPremium Agricultural Exports from Kolhapur', 'font-size: 14px; color: #1a2540; font-weight: 600;');
-console.log('%cWebsite: www.meravaglobal.com', 'font-size: 12px; color: #666;');
-console.log('%c✨ Crafted with excellence for global trade', 'font-size: 11px; color: #999; font-style: italic;');
-
-// ========== SMOOTH SCROLL FOR ALL ANCHOR LINKS ==========
+// ========== SMOOTH SCROLL FOR ANCHOR LINKS ==========
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         const href = this.getAttribute('href');
-        if (href && href !== '#') {
-            const targetId = href.substring(1);
-            const targetSection = document.getElementById(targetId);
-            
-            if (targetSection) {
-                e.preventDefault();
-                showSection(targetId);
-            }
+        if (href !== '#' && href.length > 1) {
+            e.preventDefault();
+            const sectionId = href.substring(1);
+            showSection(sectionId);
         }
     });
 });
 
-// ========== DEBOUNCED SCROLL HANDLER ==========
-let ticking = false;
-let lastKnownScrollPosition = 0;
+// ========== INTERSECTION OBSERVER FOR LAZY ANIMATIONS ==========
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
 
-function doSomething(scrollPos) {
-    // Scroll-dependent operations
-    if (scrollPos > 300) {
-        scrollTopBtn.classList.add('visible');
-    } else {
-        scrollTopBtn.classList.remove('visible');
-    }
-}
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+        }
+    });
+}, observerOptions);
 
-window.addEventListener('scroll', () => {
-    lastKnownScrollPosition = window.scrollY;
+// ========== LOGO ANIMATION ==========
+gsap.to('.logo img', {
+    rotation: 360,
+    duration: 20,
+    repeat: -1,
+    ease: 'none'
+});
 
-    if (!ticking) {
-        window.requestAnimationFrame(() => {
-            doSomething(lastKnownScrollPosition);
-            ticking = false;
-        });
+// ========== SCROLL INDICATOR ANIMATION ==========
+gsap.to('.scroll-indicator', {
+    y: 10,
+    duration: 1.5,
+    repeat: -1,
+    yoyo: true,
+    ease: 'power1.inOut'
+});
 
-        ticking = true;
-    }
-}, { passive: true });
+// ========== CONSOLE BRANDING ==========
+console.log('%c🦅 Merava Global', 'font-size: 24px; font-weight: bold; color: #c9a961;');
+console.log('%cImport & Export Excellence from Kolhapur', 'font-size: 14px; color: #1a2540;');
+console.log('%cPowered by GSAP & Modern Web Technologies', 'font-size: 12px; color: #666;');
+
+// ========== WHATSAPP FLOAT BUTTON ==========
+const whatsappBtn = document.createElement('a');
+whatsappBtn.href = 'https://wa.me/918087227973';
+whatsappBtn.target = '_blank';
+whatsappBtn.className = 'whatsapp-float';
+whatsappBtn.innerHTML = '<i class="fab fa-whatsapp"></i>';
+whatsappBtn.style.cssText = `
+    position: fixed;
+    bottom: 30px;
+    right: 100px;
+    width: 60px;
+    height: 60px;
+    background: #25D366;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    box-shadow: 0 5px 20px rgba(37, 211, 102, 0.5);
+    z-index: 999;
+    transition: all 0.3s ease;
+`;
+
+document.body.appendChild(whatsappBtn);
+
+// Animate WhatsApp button
+gsap.from('.whatsapp-float', {
+    scale: 0,
+    duration: 0.5,
+    delay: 2,
+    ease: 'back.out(1.7)'
+});
+
+gsap.to('.whatsapp-float', {
+    y: -5,
+    duration: 1,
+    repeat: -1,
+    yoyo: true,
+    ease: 'power1.inOut'
+});
+
+whatsappBtn.addEventListener('mouseenter', function() {
+    gsap.to(this, {
+        scale: 1.1,
+        rotation: 15,
+        duration: 0.3
+    });
+});
+
+whatsappBtn.addEventListener('mouseleave', function() {
+    gsap.to(this, {
+        scale: 1,
+        rotation: 0,
+        duration: 0.3
+    });
+});

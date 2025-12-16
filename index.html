@@ -42,7 +42,7 @@
                     </div>
                     
                     <ul class="nav-menu" id="navMenu">
-                        <li><a href="#home" class="nav-link" data-section="home">Home</a></li>
+                        <li><a href="#home" class="nav-link active" data-section="home">Home</a></li>
                         <li><a href="#about" class="nav-link" data-section="about">About</a></li>
                         <li class="dropdown">
                             <a href="#products" class="nav-link" data-section="products">Products <i class="fas fa-chevron-down"></i></a>
@@ -72,13 +72,16 @@
         <div class="hero-bg-image"></div>
         <div class="container">
             <div class="hero-content">
+                <div class="hero-logo-container">
+                    <img src="assets/logo3.jpeg" alt="Merava Global" class="hero-logo">
+                </div>
                 <h2 class="hero-title">Premium Agricultural Exports</h2>
                 <div class="hero-divider"></div>
                 <p class="hero-subtitle">From the Heart of Kolhapur to the World</p>
                 <p class="hero-description">Delivering authentic Indian agricultural products with excellence and integrity</p>
                 <div class="hero-buttons">
-                    <a href="#products" class="btn btn-primary btn-explore">Explore Products</a>
-                    <a href="#contact" class="btn btn-secondary btn-contact">Get In Touch</a>
+                    <a href="#products" class="btn btn-primary btn-explore" data-section="products">Explore Products</a>
+                    <a href="#contact" class="btn btn-secondary btn-contact" data-section="contact">Get In Touch</a>
                 </div>
                 <div class="hero-features">
                     <div class="feature-item">
@@ -95,12 +98,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="scroll-indicator">
-            <div class="mouse">
-                <div class="wheel"></div>
-            </div>
-            <span>Scroll to Explore</span>
         </div>
     </section>
 
@@ -493,7 +490,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact">
+    <section id="contact" class="section contact">
         <div class="container">
             <div class="section-header">
                 <span class="section-subtitle">Get In Touch</span>
@@ -533,24 +530,24 @@
                     <form class="contact-form" id="contactForm">
                         <div class="form-row">
                             <div class="form-group">
-                                <input type="text" id="name" name="name" required>
+                                <input type="text" id="name" name="name" placeholder=" " required>
                                 <label for="name">Your Name</label>
                             </div>
                             
                             <div class="form-group">
-                                <input type="email" id="email" name="email" required>
+                                <input type="email" id="email" name="email" placeholder=" " required>
                                 <label for="email">Your Email</label>
                             </div>
                         </div>
                         
                         <div class="form-row">
                             <div class="form-group">
-                                <input type="tel" id="phone" name="phone" required>
+                                <input type="tel" id="phone" name="phone" placeholder=" " required>
                                 <label for="phone">Phone Number</label>
                             </div>
                             
                             <div class="form-group">
-                                <input type="text" id="company" name="company">
+                                <input type="text" id="company" name="company" placeholder=" ">
                                 <label for="company">Company Name</label>
                             </div>
                         </div>
@@ -565,11 +562,11 @@
                                 <option value="spices">Spices</option>
                                 <option value="other">Other</option>
                             </select>
-                            <label for="product">Product Interest</label>
+                            <label for="product" class="select-label">Product Interest</label>
                         </div>
                         
                         <div class="form-group">
-                            <textarea id="message" name="message" rows="5" required></textarea>
+                            <textarea id="message" name="message" rows="5" placeholder=" " required></textarea>
                             <label for="message">Your Message</label>
                         </div>
                         
@@ -591,19 +588,17 @@
                     <h3>Merava Global</h3>
                     <p>Premium agricultural exports from Kolhapur</p>
                     <div class="footer-social">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://wa.me/918087227973" target="_blank"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
                 
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#products">Products</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#home" data-section="home">Home</a></li>
+                        <li><a href="#about" data-section="about">About</a></li>
+                        <li><a href="#products" data-section="products">Products</a></li>
+                        <li><a href="#contact" data-section="contact">Contact</a></li>
                     </ul>
                 </div>
                 
