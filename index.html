@@ -1,184 +1,274 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Merava Global - Premium Agricultural Exports from Kolhapur. Quality Jaggery, Fresh Produce, Rice, Grains & Spices. Direct from farmers to global markets.">
+    <meta name="keywords"
+        content="agricultural exports, jaggery, fresh produce, rice, spices, kolhapur exports, indian agriculture, organic products, merava global, premium agricultural products">
+    <meta name="author" content="Merava Global">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Merava Global - Premium Agricultural Export | Kolhapur">
+    <meta property="og:description"
+        content="Delivering authentic Indian agricultural products with excellence and integrity from Kolhapur to the world">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://meravaglobal.com">
+    <meta property="og:image" content="assets/logo3.jpeg">
+    <link rel="canonical" href="https://meravaglobal.com">
     <title>Merava Global - Premium Agricultural Export | Kolhapur</title>
-    <meta name="description" content="Merava Global - Leading exporter of Jaggery Products, Fresh Agricultural Produce, Spices & More from Kolhapur, India">
-    <link rel="icon" href="assets/logo1.jpeg" type="image/jpeg">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Merava Global",
+  "url": "https://meravaglobal.com",
+  "logo": "https://meravaglobal.com/assets/logo3.jpeg",
+  "description": "Premium Agricultural Exports from Kolhapur",
+  "foundingDate": "2022",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "252C/1A/3, 2nd Floor, Sonali Apartment, Nagala Park",
+    "addressLocality": "Kolhapur",
+    "addressRegion": "Maharashtra",
+    "postalCode": "416002",
+    "addressCountry": "IN"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+91-8087227973",
+    "contactType": "Customer Service"
+  },
+  "founder": [
+    {
+      "@type": "Person",
+      "name": "Vikram Sawant"
+    },
+    {
+      "@type": "Person",
+      "name": "Saurabh Parandekar"
+    }
+  ]
+}
+</script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 900,
+            easing: 'ease-out-cubic',
+            once: true
+        });
+    </script>
+
 </head>
+
 <body>
-    <!-- Header -->
-    <header class="header" id="header">
-        <div class="top-bar" id="topBar">
-            <div class="container">
-                <div class="top-bar-content">
-                    <div class="contact-info">
-                        <a href="tel:+918087227973"><i class="fas fa-phone"></i> +91 8087227973</a>
-                        <a href="tel:+919156417595"><i class="fas fa-phone"></i> +91 9156417595</a>
-                        <a href="mailto:info@meravaglobal.com"><i class="fas fa-envelope"></i> info@meravaglobal.com</a>
-                    </div>
-                    <div class="social-links">
-                        <a href="https://wa.me/918087227973" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    </div>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader">
+            <div class="leaf-loader"></div>
+            <p>Loading...</p>
+        </div>
+    </div>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="contact-info">
+                    <a href="tel:+918087227973" aria-label="Call us at +91 8087227973"><i class="fas fa-phone"></i> +91
+                        8087227973</a>
+                    <a href="tel:+919156417595" aria-label="Call us at +91 9156417595"><i class="fas fa-phone"></i> +91
+                        9156417595</a>
+                    <a href="mailto:info@meravaglobal.com" aria-label="Email us"><i class="fas fa-envelope"></i>
+                        info@meravaglobal.com</a>
+                </div>
+                <div class="social-links">
+                    <a href="https://wa.me/918087227973" target="_blank"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
         </div>
-        
-        <nav class="navbar" id="navbar">
+
+        <!-- Navigation -->
+        <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
             <div class="container">
                 <div class="nav-wrapper">
-                    <div class="logo">
-                        <img src="assets/logo2.jpeg" alt="Merava Global">
+                    <div class="logo" data-section="home">
+                        <img src="assets/logo2.jpeg" alt="Merava Global Logo" width="50" height="50">
                         <div class="logo-text">
                             <h1>MERAVA GLOBAL</h1>
                             <span>Import Export</span>
                         </div>
                     </div>
-                    
-                    <ul class="nav-menu" id="navMenu">
-                        <li><a href="#home" class="nav-link" data-section="home">Home</a></li>
-                        <li><a href="#about" class="nav-link" data-section="about">About</a></li>
-                        <li class="dropdown">
-                            <a href="#products" class="nav-link" data-section="products">Products <i class="fas fa-chevron-down"></i></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#products" data-category="jaggery">Jaggery Products</a></li>
-                                <li><a href="#products" data-category="produce">Fresh Produce</a></li>
-                                <li><a href="#products" data-category="grains">Rice & Grains</a></li>
-                                <li><a href="#products" data-category="spices">Spices</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
-                    </ul>
-                    
-                    <button class="mobile-toggle" id="mobileToggle">
+                    <div class="nav-menu" id="navMenu">
+                        <a href="#home" class="nav-link active" data-section="home">Home</a>
+                        <a href="#about" class="nav-link" data-section="about">About</a>
+                        <div class="dropdown">
+                            <a href="#products" class="nav-link" data-section="products">Products <i
+                                    class="fas fa-chevron-down"></i></a>
+
+                            <div class="dropdown-content">
+                                <a href="#products" data-filter="jaggery">Jaggery Products</a>
+                                <a href="#products" data-filter="fresh">Fresh Produce</a>
+                                <a href="#products" data-filter="rice">Rice & Grains</a>
+                                <a href="#products" data-filter="spices">Spices</a>
+                            </div>
+                        </div>
+                        <a href="#contact" class="nav-link" data-section="contact">Contact</a>
+                        <a href="#certifications" class="nav-link" data-section="certifications">Certifications</a>
+                    </div>
+                    <div class="hamburger" id="hamburger" aria-label="Toggle menu" role="button" tabindex="0">
                         <span></span>
                         <span></span>
                         <span></span>
-                    </button>
+                    </div>
                 </div>
             </div>
         </nav>
-    </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="section hero active-section">
-        <div class="hero-overlay"></div>
-        <div class="hero-bg-image"></div>
-        <div class="container">
-            <div class="hero-content">
-                <h2 class="hero-title">Premium Agricultural Exports</h2>
-                <div class="hero-divider"></div>
-                <p class="hero-subtitle">From the Heart of Kolhapur to the World</p>
-                <p class="hero-description">Delivering authentic Indian agricultural products with excellence and integrity</p>
-                <div class="hero-buttons">
-                    <a href="#products" class="btn btn-primary btn-explore">Explore Products</a>
-                    <a href="#contact" class="btn btn-secondary btn-contact">Get In Touch</a>
-                </div>
-                <div class="hero-features">
-                    <div class="feature-item">
-                        <i class="fas fa-globe-americas"></i>
-                        <span>Global Export</span>
+        <!-- Home Section -->
+        <section id="home" class="section hero-section active" data-section="home">
+            <div class="hero-overlay"></div>
+            <div class="hero-particles"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <img src="assets/logo3.jpeg" alt="Merava Global" class="hero-logo" width="150" height="150">
+                    <h2 class="hero-title">Premium Agricultural Exports</h2>
+                    <p class="hero-subtitle">From the Heart of Kolhapur to the World</p>
+                    <p class="hero-description">Delivering authentic Indian agricultural products with excellence and
+                        integrity</p>
+                    <div class="hero-buttons">
+                        <a href="#products" class="btn btn-primary" data-section="products">
+                            <i class="fas fa-leaf"></i> Explore Products
+                        </a>
+                        <a href="#contact" class="btn btn-secondary" data-section="contact">
+                            <i class="fas fa-envelope"></i> Get In Touch
+                        </a>
                     </div>
-                    <div class="feature-item">
-                        <i class="fas fa-certificate"></i>
-                        <span>Quality Certified</span>
-                    </div>
-                    <div class="feature-item">
-                        <i class="fas fa-shipping-fast"></i>
-                        <span>Fast Delivery</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <div class="mouse">
-                <div class="wheel"></div>
-            </div>
-            <span>Scroll to Explore</span>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section about">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-subtitle">Who We Are</span>
-                <h2 class="section-title">About Merava Global</h2>
-                <div class="title-underline"></div>
-            </div>
-            
-            <div class="about-content">
-                <div class="about-grid">
-                    <div class="about-image-section">
-                        <div class="about-image-wrapper">
-                            <img src="assets/img1.jpeg" alt="Merava Global" class="about-main-image">
-                            <div class="about-float-card">
-                                <div class="float-card-content">
-                                    <div class="card-icon">
-                                        <i class="fas fa-award"></i>
-                                    </div>
-                                    <div class="card-text">
-                                        <h4>Since 2024</h4>
-                                        <p>Excellence in Export</p>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="hero-features">
+                        <div class="feature-item">
+                            <i class="fas fa-globe"></i>
+                            <span>Global Export</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-certificate"></i>
+                            <span>Quality Certified</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-shipping-fast"></i>
+                            <span>Fast Delivery</span>
                         </div>
                     </div>
-                    
-                    <div class="about-text-section">
-                        <h3 class="about-heading">Your Trusted Partner in Agricultural Excellence</h3>
-                        <p class="about-para">Merava Global stands as a distinguished name in agricultural exports, based in the historic city of Kolhapur, Maharashtra. We specialize in sourcing and delivering premium quality Indian agricultural products to discerning buyers across the globe.</p>
-                        
-                        <p class="about-para">Our commitment extends beyond mere transactions—we believe in building lasting relationships founded on trust, quality, and mutual growth. Every product we export carries the authentic essence of Indian agriculture, backed by rigorous quality control and ethical sourcing practices.</p>
-                        
-                        <div class="about-highlights">
-                            <div class="highlight-card">
-                                <div class="highlight-icon">
+                    <!-- Featured Products Preview -->
+                    <div class="hero-products-preview">
+                        <h3>Featured Products</h3>
+                        <div class="hero-products-grid">
+                            <div class="hero-product-card" data-section="products" data-filter="jaggery">
+                                <div class="hero-product-icon">
+                                    <i class="fas fa-cube"></i>
+                                </div>
+                                <h4>Jaggery Products</h4>
+                                <p>Premium quality natural sweeteners</p>
+                            </div>
+                            <div class="hero-product-card" data-section="products" data-filter="fresh">
+                                <div class="hero-product-icon">
+                                    <i class="fas fa-seedling"></i>
+                                </div>
+                                <h4>Fresh Produce</h4>
+                                <p>Farm-fresh vegetables & fruits</p>
+                            </div>
+                            <div class="hero-product-card" data-section="products" data-filter="rice">
+                                <div class="hero-product-icon">
+                                    <i class="fas fa-wheat-awn"></i>
+                                </div>
+                                <h4>Rice & Grains</h4>
+                                <p>Premium basmati & pulses</p>
+                            </div>
+                            <div class="hero-product-card" data-section="products" data-filter="spices">
+                                <div class="hero-product-icon">
+                                    <i class="fas fa-pepper-hot"></i>
+                                </div>
+                                <h4>Spices</h4>
+                                <p>Authentic Indian spices</p>
+                            </div>
+                        </div>
+                        <a href="#products" class="btn-view-all" data-section="products">
+                            View All Products <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section about-section" data-section="about">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-subtitle">Who We Are</span>
+                    <h2 class="section-title">About Merava Global</h2>
+                </div>
+                <div class="about-content">
+                    <div class="about-image">
+                        <img src="assets/img1.jpeg" alt="Merava Global Agricultural Excellence" loading="lazy">
+                        <div class="about-badge">
+                            <span class="badge-year">Since 2024</span>
+                            <span class="badge-text">Excellence in Export</span>
+                        </div>
+                        <div class="image-float-effect"></div>
+                    </div>
+                    <div class="about-text">
+                        <h3>Your Trusted Partner in Agricultural Excellence</h3>
+                        <p>Merava Global stands as a distinguished name in agricultural exports, based in the historic
+                            city of Kolhapur, Maharashtra. We specialize in sourcing and delivering premium quality
+                            Indian agricultural products to discerning buyers across the globe.</p>
+                        <p>Our commitment extends beyond mere transactions—we believe in building lasting relationships
+                            founded on trust, quality, and mutual growth. Every product we export carries the authentic
+                            essence of Indian agriculture, backed by rigorous quality control and ethical sourcing
+                            practices.</p>
+                        <div class="about-features">
+                            <div class="about-feature-item">
+                                <div class="feature-icon">
                                     <i class="fas fa-leaf"></i>
                                 </div>
-                                <div class="highlight-content">
-                                    <h4>Authentic Products</h4>
-                                    <p>Sourced directly from local farmers</p>
-                                </div>
+                                <h4>Authentic Products</h4>
+                                <p>Sourced directly from local farmers</p>
                             </div>
-                            
-                            <div class="highlight-card">
-                                <div class="highlight-icon">
+                            <div class="about-feature-item">
+                                <div class="feature-icon">
                                     <i class="fas fa-shield-alt"></i>
                                 </div>
-                                <div class="highlight-content">
-                                    <h4>Quality Assurance</h4>
-                                    <p>Stringent quality checks at every stage</p>
-                                </div>
+                                <h4>Quality Assurance</h4>
+                                <p>Stringent quality checks at every stage</p>
                             </div>
-                            
-                            <div class="highlight-card">
-                                <div class="highlight-icon">
-                                    <i class="fas fa-truck"></i>
+                            <div class="about-feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-globe-asia"></i>
                                 </div>
-                                <div class="highlight-content">
-                                    <h4>Global Reach</h4>
-                                    <p>Reliable delivery worldwide</p>
-                                </div>
+                                <h4>Global Reach</h4>
+                                <p>Reliable delivery worldwide</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Founder Section -->
                 <div class="founder-section">
                     <div class="founder-card">
                         <div class="founder-image">
-                            <img src="assets/img2.jpeg" alt="Yash Sangrule">
+                            <img src="assets/img2.jpeg" alt="Yash Sangrule - Founder of Merava Global" loading="lazy">
                             <div class="founder-badge">
-                                <i class="fas fa-user-tie"></i>
+                                <i class="fas fa-award"></i>
                             </div>
                         </div>
                         <div class="founder-info">
@@ -186,447 +276,525 @@
                             <p class="founder-title">Founder & Technical Head</p>
                             <div class="founder-contact">
                                 <a href="tel:+918087227973"><i class="fas fa-phone"></i> +91 8087227973</a>
-                                <a href="mailto:info@meravaglobal.com"><i class="fas fa-envelope"></i> info@meravaglobal.com</a>
+                                <a href="mailto:info@meravaglobal.com"><i class="fas fa-envelope"></i>
+                                    info@meravaglobal.com</a>
                             </div>
-                            <p class="founder-description">Leading Merava Global with a vision to bridge the gap between Indian agriculture and global markets, ensuring quality and authenticity in every shipment.</p>
+                            <p class="founder-description">Leading Merava Global with a vision to bridge the gap between
+                                Indian agriculture and global markets, ensuring quality and authenticity in every
+                                shipment.</p>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Company Info -->
-                <div class="company-details">
-                    <div class="detail-card">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
+
+                    <div class="company-details">
+                        <div class="detail-card">
+                            <div class="detail-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
                             <h4>Our Address</h4>
-                            <p>252C/1A/3, 2nd Floor, Sonali Apartment<br>Nagala Park, Kolhapur - 416002<br>Maharashtra, India</p>
+                            <p>252C/1A/3, 2nd Floor, Sonali Apartment<br>Nagala Park, Kolhapur - 416002<br>Maharashtra,
+                                India</p>
                         </div>
-                    </div>
-                    
-                    <div class="detail-card">
-                        <i class="fas fa-globe"></i>
-                        <div>
+                        <div class="detail-card">
+                            <div class="detail-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
                             <h4>Website</h4>
                             <p>www.meravaglobal.com</p>
                         </div>
-                    </div>
-                    
-                    <div class="detail-card">
-                        <i class="fas fa-industry"></i>
-                        <div>
+                        <div class="detail-card">
+                            <div class="detail-icon">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
                             <h4>Nature of Business</h4>
                             <p>Import & Export of Premium Agricultural Products</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Products Section -->
-    <section id="products" class="section products">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-subtitle">What We Offer</span>
-                <h2 class="section-title">Our Premium Products</h2>
-                <div class="title-underline"></div>
-                <p class="section-description">Handpicked and quality-assured products for global markets</p>
-            </div>
-            
-            <div class="product-categories">
-                <button class="category-btn active" data-category="all">
-                    <i class="fas fa-th"></i>
-                    <span>All Products</span>
-                </button>
-                <button class="category-btn" data-category="jaggery">
-                    <i class="fas fa-cube"></i>
-                    <span>Jaggery</span>
-                </button>
-                <button class="category-btn" data-category="produce">
-                    <i class="fas fa-carrot"></i>
-                    <span>Fresh Produce</span>
-                </button>
-                <button class="category-btn" data-category="grains">
-                    <i class="fas fa-seedling"></i>
-                    <span>Rice & Grains</span>
-                </button>
-                <button class="category-btn" data-category="spices">
-                    <i class="fas fa-mortar-pestle"></i>
-                    <span>Spices</span>
-                </button>
-            </div>
-            
-            <div class="products-grid">
-                <!-- Jaggery Products -->
-                <div class="product-card" data-category="jaggery">
-                    <div class="product-image">
-                        <div class="product-badge">Premium</div>
-                        <div class="product-overlay">
-                            <a href="https://wa.me/918087227973?text=I'm interested in Jaggery Cubes" class="btn-enquiry">
-                                <i class="fab fa-whatsapp"></i> Enquire on WhatsApp
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Jaggery Cubes</h3>
-                        <p>Premium quality jaggery cubes made from pure sugarcane, perfect for sweetening and cooking</p>
-                        <div class="product-meta">
-                            <span><i class="fas fa-check-circle"></i> 100% Natural</span>
-                            <span><i class="fas fa-leaf"></i> Organic</span>
-                        </div>
-                    </div>
+        <!-- Products Section -->
+        <section id="products" class="section products-section" data-section="products">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-subtitle">What We Offer</span>
+                    <h2 class="section-title">Our Premium Products</h2>
+                    <p>Handpicked and quality-assured products for global markets</p>
                 </div>
-                
-                <div class="product-card" data-category="jaggery">
-                    <div class="product-image">
-                        <div class="product-badge">Premium</div>
-                        <div class="product-overlay">
-                            <a href="https://wa.me/918087227973?text=I'm interested in Jaggery Blocks" class="btn-enquiry">
-                                <i class="fab fa-whatsapp"></i> Enquire on WhatsApp
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Jaggery Blocks</h3>
-                        <p>Traditional solid jaggery blocks for various culinary uses and authentic taste</p>
-                        <div class="product-meta">
-                            <span><i class="fas fa-check-circle"></i> 100% Natural</span>
-                            <span><i class="fas fa-award"></i> Premium Quality</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="product-card" data-category="jaggery">
-                    <div class="product-image">
-                        <div class="product-badge">Popular</div>
-                        <div class="product-overlay">
-                            <a href="https://wa.me/918087227973?text=I'm interested in Jaggery Powder" class="btn-enquiry">
-                                <i class="fab fa-whatsapp"></i> Enquire on WhatsApp
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Jaggery Powder</h3>
-                        <p>Finely ground jaggery powder for easy dissolution and immediate use</p>
-                        <div class="product-meta">
-                            <span><i class="fas fa-check-circle"></i> Fine Texture</span>
-                            <span><i class="fas fa-shipping-fast"></i> Ready to Use</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Fresh Produce -->
-                <div class="product-card" data-category="produce">
-                    <div class="product-image">
-                        <div class="product-badge">Fresh</div>
-                        <div class="product-overlay">
-                            <a href="https://wa.me/918087227973?text=I'm interested in Fresh Onions" class="btn-enquiry">
-                                <i class="fab fa-whatsapp"></i> Enquire on WhatsApp
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Fresh Onions</h3>
-                        <p>Premium quality onions sourced from the best farms across India</p>
-                        <div class="product-meta">
-                            <span><i class="fas fa-leaf"></i> Farm Fresh</span>
-                            <span><i class="fas fa-truck"></i> Direct Supply</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="product-card" data-category="produce">
-                    <div class="product-image">
-                        <div class="product-badge">Fresh</div>
-                        <div class="product-overlay">
-                            <a href="https://wa.me/918087227973?text=I'm interested in Fresh Vegetables" class="btn-enquiry">
-                                <i class="fab fa-whatsapp"></i> Enquire on WhatsApp
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Fresh Vegetables</h3>
-                        <p>Wide variety of farm-fresh vegetables delivered at peak freshness</p>
-                        <div class="product-meta">
-                            <span><i class="fas fa-leaf"></i> Seasonal Fresh</span>
-                            <span><i class="fas fa-certificate"></i> Quality Checked</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="product-card" data-category="produce">
-                    <div class="product-image">
-                        <div class="product-badge">Fresh</div>
-                        <div class="product-overlay">
-                            <a href="https://wa.me/918087227973?text=I'm interested in Fresh Fruits" class="btn-enquiry">
-                                <i class="fab fa-whatsapp"></i> Enquire on WhatsApp
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Fresh Fruits</h3>
-                        <p>Seasonal fresh fruits with natural sweetness and nutrients</p>
-                        <div class="product-meta">
-                            <span><i class="fas fa-apple-alt"></i> Seasonal</span>
-                            <span><i class="fas fa-heart"></i> Nutritious</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Rice & Grains -->
-                <div class="product-card" data-category="grains">
-                    <div class="product-image">
-                        <div class="product-badge">Premium</div>
-                        <div class="product-overlay">
-                            <a href="https://wa.me/918087227973?text=I'm interested in Basmati Rice" class="btn-enquiry">
-                                <i class="fab fa-whatsapp"></i> Enquire on WhatsApp
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Basmati Rice</h3>
-                        <p>Premium long-grain aromatic basmati rice from finest paddy fields</p>
-                        <div class="product-meta">
-                            <span><i class="fas fa-star"></i> Premium Grade</span>
-                            <span><i class="fas fa-award"></i> Aromatic</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="product-card" data-category="grains">
-                    <div class="product-image">
-                        <div class="product-badge">Quality</div>
-                        <div class="product-overlay">
-                            <a href="https://wa.me/918087227973?text=I'm interested in Non-Basmati Rice" class="btn-enquiry">
-                                <i class="fab fa-whatsapp"></i> Enquire on WhatsApp
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Non-Basmati Rice</h3>
-                        <p>Quality non-basmati rice varieties for everyday cooking needs</p>
-                        <div class="product-meta">
-                            <span><i class="fas fa-seedling"></i> Multiple Varieties</span>
-                            <span><i class="fas fa-check-circle"></i> Quality Assured</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="product-card" data-category="grains">
-                    <div class="product-image">
-                        <div class="product-badge">Nutritious</div>
-                        <div class="product-overlay">
-                            <a href="https://wa.me/918087227973?text=I'm interested in Pulses" class="btn-enquiry">
-                                <i class="fab fa-whatsapp"></i> Enquire on WhatsApp
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Pulses</h3>
-                        <p>Various types of nutritious pulses rich in protein and fiber</p>
-                        <div class="product-meta">
-                            <span><i class="fas fa-heart"></i> High Protein</span>
-                            <span><i class="fas fa-leaf"></i> Natural</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="product-card" data-category="grains">
-                    <div class="product-image">
-                        <div class="product-badge">Quality</div>
-                        <div class="product-overlay">
-                            <a href="https://wa.me/918087227973?text=I'm interested in Seeds & Grains" class="btn-enquiry">
-                                <i class="fab fa-whatsapp"></i> Enquire on WhatsApp
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Seeds & Grains</h3>
-                        <p>High-quality seeds and grain varieties for health-conscious consumers</p>
-                        <div class="product-meta">
-                            <span><i class="fas fa-seedling"></i> Organic</span>
-                            <span><i class="fas fa-certificate"></i> Certified</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Spices -->
-                <div class="product-card" data-category="spices">
-                    <div class="product-image">
-                        <div class="product-badge">Premium</div>
-                        <div class="product-overlay">
-                            <a href="https://wa.me/918087227973?text=I'm interested in Turmeric" class="btn-enquiry">
-                                <i class="fab fa-whatsapp"></i> Enquire on WhatsApp
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Turmeric (Raw & Powder)</h3>
-                        <p>Premium quality turmeric in raw and powder form with natural curcumin</p>
-                        <div class="product-meta">
-                            <span><i class="fas fa-leaf"></i> 100% Natural</span>
-                            <span><i class="fas fa-mortar-pestle"></i> Fresh Ground</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="product-card" data-category="spices">
-                    <div class="product-image">
-                        <div class="product-badge">Superfood</div>
-                        <div class="product-overlay">
-                            <a href="https://wa.me/918087227973?text=I'm interested in Moringa Powder" class="btn-enquiry">
-                                <i class="fab fa-whatsapp"></i> Enquire on WhatsApp
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3>Moringa Powder</h3>
-                        <p>Nutrient-rich moringa powder packed with vitamins and minerals</p>
-                        <div class="product-meta">
-                            <span><i class="fas fa-heart"></i> Superfood</span>
-                            <span><i class="fas fa-leaf"></i> Organic</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-subtitle">Get In Touch</span>
-                <h2 class="section-title">Contact Us</h2>
-                <div class="title-underline"></div>
-            </div>
-            
-            <div class="contact-wrapper">
-                <div class="contact-info-cards">
-                    <div class="info-card">
-                        <div class="info-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <h3>Visit Us</h3>
-                        <p>252C/1A/3, 2nd Floor<br>Sonali Apartment, Nagala Park<br>Kolhapur - 416002<br>Maharashtra, India</p>
-                    </div>
-                    
-                    <div class="info-card">
-                        <div class="info-icon">
-                            <i class="fas fa-phone-alt"></i>
-                        </div>
-                        <h3>Call Us</h3>
-                        <p><a href="tel:+918087227973">+91 8087227973</a></p>
-                        <p><a href="tel:+919156417595">+91 9156417595</a></p>
-                    </div>
-                    
-                    <div class="info-card">
-                        <div class="info-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <h3>Email Us</h3>
-                        <p><a href="mailto:info@meravaglobal.com">info@meravaglobal.com</a></p>
-                    </div>
+                <div class="product-filters">
+                    <button class="filter-btn active" data-filter="all">All Products</button>
+                    <button class="filter-btn" data-filter="jaggery">Jaggery</button>
+                    <button class="filter-btn" data-filter="fresh">Fresh Produce</button>
+                    <button class="filter-btn" data-filter="rice">Rice & Grains</button>
+                    <button class="filter-btn" data-filter="spices">Spices</button>
                 </div>
-                
-                <div class="contact-form-wrapper">
-                    <form class="contact-form" id="contactForm">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <input type="text" id="name" name="name" required>
-                                <label for="name">Your Name</label>
+
+                <div class="products-grid" id="productsGrid">
+                    <!-- Jaggery Products -->
+                    <div class="product-card" data-category="jaggery">
+                        <div class="product-badge premium">Premium</div>
+                        <div class="product-image">
+                            <img src="assets/jaggery-cubes.jpeg" alt="Jaggery Cubes" loading="lazy">
+                            <div class="product-overlay"></div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Jaggery Cubes</h3>
+                            <p>Premium quality jaggery cubes made from pure sugarcane, perfect for sweetening and
+                                cooking</p>
+                            <div class="product-tags">
+                                <span class="tag">100% Natural</span>
+                                <span class="tag">Organic</span>
                             </div>
-                            
-                            <div class="form-group">
-                                <input type="email" id="email" name="email" required>
-                                <label for="email">Your Email</label>
-                            </div>
+                            <a href="https://wa.me/918087227973?text=I'm interested in Jaggery Cubes"
+                                class="btn-enquire" target="_blank" rel="noopener">
+                                <i class="fab fa-whatsapp"></i> Enquire on WhatsApp
+                            </a>
                         </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <input type="tel" id="phone" name="phone" required>
-                                <label for="phone">Phone Number</label>
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="text" id="company" name="company">
-                                <label for="company">Company Name</label>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <select id="product" name="product" required>
-                                <option value="">Select Product Interest</option>
-                                <option value="jaggery">Jaggery Products</option>
-                                <option value="vegetables">Fresh Vegetables</option>
-                                <option value="fruits">Fresh Fruits</option>
-                                <option value="rice">Rice & Grains</option>
-                                <option value="spices">Spices</option>
-                                <option value="other">Other</option>
-                            </select>
-                            <label for="product">Product Interest</label>
-                        </div>
-                        
-                        <div class="form-group">
-                            <textarea id="message" name="message" rows="5" required></textarea>
-                            <label for="message">Your Message</label>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary btn-submit">
-                            <span>Send Message</span>
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+                    </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Merava Global</h3>
-                    <p>Premium agricultural exports from Kolhapur</p>
-                    <div class="footer-social">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <div class="product-card" data-category="jaggery">
+                        <div class="product-badge premium">Premium</div>
+                        <div class="product-image">
+                            <img src="assets/jaggery-blocks.jpeg" alt="Jaggery Blocks" loading="lazy">
+                            <div class="product-overlay"></div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Jaggery Blocks</h3>
+                            <p>Traditional solid jaggery blocks for various culinary uses and authentic taste</p>
+                            <div class="product-tags">
+                                <span class="tag">100% Natural</span>
+                                <span class="tag">Premium Quality</span>
+                            </div>
+                            <a href="https://wa.me/918087227973?text=I'm interested in Jaggery Blocks"
+                                class="btn-enquire" target="_blank" rel="noopener">
+                                <i class="fab fa-whatsapp"></i> Enquire on WhatsApp
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="jaggery">
+                        <div class="product-badge popular">Popular</div>
+                        <div class="product-image">
+                            <img src="assets/jaggery-powder.jpeg" alt="Jaggery Powder" loading="lazy">
+                            <div class="product-overlay"></div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Jaggery Powder</h3>
+                            <p>Finely ground jaggery powder for easy dissolution and immediate use</p>
+                            <div class="product-tags">
+                                <span class="tag">Fine Texture</span>
+                                <span class="tag">Ready to Use</span>
+                            </div>
+                            <a href="https://wa.me/918087227973?text=I'm interested in Jaggery Powder"
+                                class="btn-enquire" target="_blank" rel="noopener">
+                                <i class="fab fa-whatsapp"></i> Enquire on WhatsApp
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Fresh Produce -->
+                    <div class="product-card" data-category="fresh">
+                        <div class="product-badge fresh">Fresh</div>
+                        <div class="product-image">
+                            <img src="assets/onions.jpeg" alt="Fresh Onions" loading="lazy">
+                            <div class="product-overlay"></div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Fresh Onions</h3>
+                            <p>Premium quality onions sourced from the best farms across India</p>
+                            <div class="product-tags">
+                                <span class="tag">Farm Fresh</span>
+                                <span class="tag">Direct Supply</span>
+                            </div>
+                            <a href="https://wa.me/918087227973?text=I'm interested in Fresh Onions" class="btn-enquire"
+                                target="_blank" rel="noopener">
+                                <i class="fab fa-whatsapp"></i> Enquire on WhatsApp
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="fresh">
+                        <div class="product-badge fresh">Fresh</div>
+                        <div class="product-image">
+                            <i class="fas fa-carrot"></i>
+                            <div class="product-overlay"></div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Fresh Vegetables</h3>
+                            <p>Wide variety of farm-fresh vegetables delivered at peak freshness</p>
+                            <div class="product-tags">
+                                <span class="tag">Seasonal Fresh</span>
+                                <span class="tag">Quality Checked</span>
+                            </div>
+                            <a href="https://wa.me/918087227973?text=I'm interested in Fresh Vegetables"
+                                class="btn-enquire" target="_blank" rel="noopener">
+                                <i class="fab fa-whatsapp"></i> Enquire on WhatsApp
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="fresh">
+                        <div class="product-badge fresh">Fresh</div>
+                        <div class="product-image">
+                            <img src="assets/fruits.jpeg" alt="Fresh Fruits" loading="lazy">
+                            <div class="product-overlay"></div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Fresh Fruits</h3>
+                            <p>Seasonal fresh fruits with natural sweetness and nutrients</p>
+                            <div class="product-tags">
+                                <span class="tag">Seasonal</span>
+                                <span class="tag">Nutritious</span>
+                            </div>
+                            <a href="https://wa.me/918087227973?text=I'm interested in Fresh Fruits" class="btn-enquire"
+                                target="_blank" rel="noopener">
+                                <i class="fab fa-whatsapp"></i> Enquire on WhatsApp
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Rice & Grains -->
+                    <div class="product-card" data-category="rice">
+                        <div class="product-badge premium">Premium</div>
+                        <div class="product-image">
+                            <i class="fas fa-wheat"></i>
+                            <div class="product-overlay"></div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Basmati Rice</h3>
+                            <p>Premium long-grain aromatic basmati rice from finest paddy fields</p>
+                            <div class="product-tags">
+                                <span class="tag">Premium Grade</span>
+                                <span class="tag">Aromatic</span>
+                            </div>
+                            <a href="https://wa.me/918087227973?text=I'm interested in Basmati Rice" class="btn-enquire"
+                                target="_blank" rel="noopener">
+                                <i class="fab fa-whatsapp"></i> Enquire on WhatsApp
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="rice">
+                        <div class="product-badge quality">Quality</div>
+                        <div class="product-image">
+                            <i class="fas fa-wheat"></i>
+                            <div class="product-overlay"></div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Non-Basmati Rice</h3>
+                            <p>Quality non-basmati rice varieties for everyday cooking needs</p>
+                            <div class="product-tags">
+                                <span class="tag">Multiple Varieties</span>
+                                <span class="tag">Quality Assured</span>
+                            </div>
+                            <a href="https://wa.me/918087227973?text=I'm interested in Non-Basmati Rice"
+                                class="btn-enquire" target="_blank" rel="noopener">
+                                <i class="fab fa-whatsapp"></i> Enquire on WhatsApp
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="rice">
+                        <div class="product-badge nutritious">Nutritious</div>
+                        <div class="product-image">
+                            <i class="fas fa-bowl-rice"></i>
+                            <div class="product-overlay"></div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Pulses</h3>
+                            <p>Various types of nutritious pulses rich in protein and fiber</p>
+                            <div class="product-tags">
+                                <span class="tag">High Protein</span>
+                                <span class="tag">Natural</span>
+                            </div>
+                            <a href="https://wa.me/918087227973?text=I'm interested in Pulses" class="btn-enquire"
+                                target="_blank" rel="noopener">
+                                <i class="fab fa-whatsapp"></i> Enquire on WhatsApp
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="rice">
+                        <div class="product-badge quality">Quality</div>
+                        <div class="product-image">
+                            <i class="fas fa-leaf"></i>
+                            <div class="product-overlay"></div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Seeds & Grains</h3>
+                            <p>High-quality seeds and grain varieties for health-conscious consumers</p>
+                            <div class="product-tags">
+                                <span class="tag">Organic</span>
+                                <span class="tag">Certified</span>
+                            </div>
+                            <a href="https://wa.me/918087227973?text=I'm interested in Seeds & Grains"
+                                class="btn-enquire" target="_blank" rel="noopener">
+                                <i class="fab fa-whatsapp"></i> Enquire on WhatsApp
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Spices -->
+                    <div class="product-card" data-category="spices">
+                        <div class="product-badge premium">Premium</div>
+                        <div class="product-image">
+                            <img src="assets/turmeric.jpeg" alt="Turmeric" loading="lazy">
+                            <div class="product-overlay"></div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Turmeric (Raw & Powder)</h3>
+                            <p>Premium quality turmeric in raw and powder form with natural curcumin</p>
+                            <div class="product-tags">
+                                <span class="tag">100% Natural</span>
+                                <span class="tag">Fresh Ground</span>
+                            </div>
+                            <a href="https://wa.me/918087227973?text=I'm interested in Turmeric" class="btn-enquire"
+                                target="_blank" rel="noopener">
+                                <i class="fab fa-whatsapp"></i> Enquire on WhatsApp
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="spices">
+                        <div class="product-badge superfood">Superfood</div>
+                        <div class="product-image">
+                            <img src="assets/moringa-powder.jpeg" alt="Moringa Powder" loading="lazy">
+                            <div class="product-overlay"></div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Moringa Powder</h3>
+                            <p>Nutrient-rich moringa powder packed with vitamins and minerals</p>
+                            <div class="product-tags">
+                                <span class="tag">Superfood</span>
+                                <span class="tag">Organic</span>
+                            </div>
+                            <a href="https://wa.me/918087227973?text=I'm interested in Moringa Powder"
+                                class="btn-enquire" target="_blank" rel="noopener">
+                                <i class="fab fa-whatsapp"></i> Enquire on WhatsApp
+                            </a>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#products">Products</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section contact-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-subtitle">Get In Touch</span>
+                    <h2 class="section-title">Contact Us</h2>
                 </div>
-                
-                <div class="footer-section">
-                    <h4>Contact</h4>
-                    <ul class="footer-contact">
-                        <li><i class="fas fa-map-marker-alt"></i> Kolhapur, Maharashtra</li>
-                        <li><i class="fas fa-phone"></i> +91 8087227973</li>
-                        <li><i class="fas fa-envelope"></i> info@meravaglobal.com</li>
-                    </ul>
+
+                <div class="contact-content">
+                    <div class="contact-info-cards">
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h3>Visit Us</h3>
+                            <p>252C/1A/3, 2nd Floor<br>Sonali Apartment, Nagala Park<br>Kolhapur -
+                                416002<br>Maharashtra, India</p>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <h3>Call Us</h3>
+                            <p><a href="tel:+918087227973">+91 8087227973</a></p>
+                            <p><a href="tel:+919156417595">+91 9156417595</a></p>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <h3>Email Us</h3>
+                            <p><a href="mailto:info@meravaglobal.com">info@meravaglobal.com</a></p>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <h3>WhatsApp Us</h3>
+                            <p><a href="https://wa.me/918087227973" target="_blank" rel="noopener">+91 8087227973</a>
+                            </p>
+                            <p><a href="https://wa.me/919156417595" target="_blank" rel="noopener">+91 9156417595</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="contact-form-wrapper">
+                        <div class="form-header">
+                            <h3>Get In Touch</h3>
+                            <p>Tell us about your requirements and we’ll get back to you shortly.</p>
+                        </div>
+
+                        <form class="contact-form" id="contactForm" novalidate>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name" class="sr-only">Your Name</label>
+                                    <input type="text" id="name" name="name" placeholder="Your Name" required />
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email" class="sr-only">Your Email</label>
+                                    <input type="email" id="email" name="email" placeholder="Your Email" required />
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="phone" class="sr-only">Phone Number</label>
+                                    <input type="tel" id="phone" name="phone" placeholder="Phone Number" required />
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="company" class="sr-only">Company Name</label>
+                                    <input type="text" id="company" name="company" placeholder="Company Name" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="product" class="sr-only">Product Interest</label>
+                                <select id="product" name="product" required>
+                                    <option value="" disabled selected>Select Product Interest</option>
+                                    <option value="jaggery">Jaggery Products</option>
+                                    <option value="vegetables">Fresh Vegetables</option>
+                                    <option value="fruits">Fresh Fruits</option>
+                                    <option value="rice">Rice & Grains</option>
+                                    <option value="spices">Spices</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message" class="sr-only">Your Message</label>
+                                <textarea id="message" name="message" rows="5" placeholder="Your Message"
+                                    required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-submit">
+                                <i class="fas fa-paper-plane"></i>
+                                <span>Send Message</span>
+                            </button>
+
+                        </form>
+                    </div>
+
                 </div>
             </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2024 Merava Global. All Rights Reserved.</p>
+        </section>
+        <!-- Certifications Section -->
+        <section id="certifications" class="section certifications-section" data-section="certifications">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-subtitle">Quality & Compliance</span>
+                    <h2 class="section-title">Our Certifications</h2>
+                    <p>Certified and compliant with international standards for quality assurance</p>
+                </div>
+
+                <div class="certifications-grid">
+                    <div class="certification-card">
+                        <div class="cert-icon">
+                            <i class="fas fa-file-invoice"></i>
+                        </div>
+                        <h3>GSTIN</h3>
+                        <p class="cert-number">27KCRPS4640K</p>
+                        <p class="cert-description">Goods and Services Tax Identification Number</p>
+                    </div>
+
+                    <div class="certification-card">
+                        <div class="cert-icon">
+                            <i class="fas fa-globe-asia"></i>
+                        </div>
+                        <h3>IEC</h3>
+                        <p class="cert-number">KCRPS4640K</p>
+                        <p class="cert-description">Import Export Code for international trade</p>
+                    </div>
+
+                    <div class="certification-card">
+                        <div class="cert-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h3>APEDA</h3>
+                        <p class="cert-number">RCMC/APEDA/23067/2025-2026</p>
+                        <p class="cert-description">Agricultural and Processed Food Products Export Development
+                            Authority</p>
+                    </div>
+
+                    <div class="certification-card">
+                        <div class="cert-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>FSSAI</h3>
+                        <p class="cert-number">11525996001005</p>
+                        <p class="cert-description">Food Safety and Standards Authority of India</p>
+                    </div>
+                </div>
+                <div class="business-info-grid">
+                    <div class="business-info-card">
+                        <div class="business-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3>Year of Establishment</h3>
+                        <p class="business-detail">2025</p>
+                    </div>
+
+                    <div class="business-info-card">
+                        <div class="business-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Nature of Business</h3>
+                        <p class="business-detail">Trader, Supplier & Exporter</p>
+                    </div>
+                </div>
+                <div class="certification-footer">
+                    <p><i class="fas fa-check-circle"></i> All certifications are valid and regularly updated</p>
+                    <p><i class="fas fa-check-circle"></i> Compliant with international quality standards</p>
+                </div>
             </div>
-        </div>
-    </footer>
+        </section>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-col">
+                        <h3>Merava Global</h3>
+                        <p>Premium agricultural exports from Kolhapur</p>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="#home" data-section="home">Home</a></li>
+                            <li><a href="#about" data-section="about">About</a></li>
+                            <li><a href="#products" data-section="products">Products</a></li>
+                            <li><a href="#contact" data-section="contact">Contact</a></li>
+                            <li><a href="#certifications" data-section="certifications">Certifications</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li>Kolhapur, Maharashtra</li>
+                            <li><a href="tel:+918087227973">+91 8087227973</a></li>
+                            <li><a href="mailto:info@meravaglobal.com">info@meravaglobal.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 Merava Global. All Rights Reserved.</p>
+                </div>
+            </div>
+        </footer>
 
-    <button class="scroll-top" id="scrollTop">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+        <!-- Back to Top Button -->
+        <button class="back-to-top" id="backToTop" aria-label="Back to top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
 
-    <script src="script.js"></script>
+        <script src="script.js"></script>
 </body>
+
 </html>

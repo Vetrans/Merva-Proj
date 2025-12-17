@@ -1,448 +1,415 @@
-// ========== MOBILE MENU TOGGLE ==========
-const mobileToggle = document.querySelector('.mobile-toggle');
-const navMenu = document.querySelector('.nav-menu');
-
-mobileToggle.addEventListener('click', () => {
-    mobileToggle.classList.toggle('active');
-    navMenu.classList.toggle('active');
+// Loading Screen
+window.addEventListener('load', () => {
+    const loadingScreen = document.getElementById('loadingScreen');
+    setTimeout(() => {
+        loadingScreen.classList.add('hidden');
+    }, 1000);
 });
 
-// Close menu when clicking outside
-document.addEventListener('click', (e) => {
-    if (!navMenu.contains(e.target) && !mobileToggle.contains(e.target)) {
-        navMenu.classList.remove('active');
-        mobileToggle.classList.remove('active');
-    }
-});
-
-// ========== NAVIGATION & SECTION SWITCHING ==========
-const navLinks = document.querySelectorAll('.nav-link');
-const sections = document.querySelectorAll('.section');
-const logo = document.querySelector('.logo');
-
-// Function to show specific section
+// Section Navigation - Single Section Visibility
 function showSection(sectionId) {
     // Hide all sections
-    sections.forEach(section => {
-        section.classList.add('hidden');
+    const allSections = document.querySelectorAll('.section');
+    allSections.forEach(section => {
+        section.classList.remove('active');
     });
-    
+
     // Show target section
-    const targetSection = document.getElementById(sectionId);
+    const targetSection = document.querySelector(`#${sectionId}`);
     if (targetSection) {
-        targetSection.classList.remove('hidden');
-        
-        // Scroll to top
+        targetSection.classList.add('active');
+
+        // Scroll to top smoothly
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
         });
     }
-    
+
     // Update active nav link
-    navLinks.forEach(link => link.classList.remove('active'));
-    const activeLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
-    if (activeLink) {
-        activeLink.classList.add('active');
-    }
-    
-    // Close mobile menu
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('data-section') === sectionId) {
+            link.classList.add('active');
+        }
+    });
+
+    // Close mobile menu if open
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    hamburger.classList.remove('active');
     navMenu.classList.remove('active');
-    mobileToggle.classList.remove('active');
 }
 
-// Navigation click handlers
-navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const targetId = link.getAttribute('href').substring(1);
-        showSection(targetId);
-    });
-});
+// Handle all navigation clicks
+document.addEventListener('click', (e) => {
+    // Check if clicked element or its parent has data-section
+    let target = e.target;
+    let sectionId = null;
 
-// Logo click - go to home
-logo.addEventListener('click', () => {
-    showSection('home');
-});
-
-// Button clicks for navigation
-document.querySelectorAll('.btn-explore, .btn-contact').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const targetId = btn.getAttribute('href').substring(1);
-        showSection(targetId);
-    });
-});
-
-// Footer navigation links
-document.querySelectorAll('.footer-section a[href^="#"]').forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const targetId = link.getAttribute('href').substring(1);
-        showSection(targetId);
-    });
-});
-
-// Initialize: Show only home section on page load
-window.addEventListener('DOMContentLoaded', () => {
-    sections.forEach(section => {
-        if (section.id !== 'home') {
-            section.classList.add('hidden');
-        } else {
-            section.classList.remove('hidden');
-        }
-    });
-    
-    // Set home nav link as active
-    navLinks.forEach(link => {
-        if (link.getAttribute('href') === '#home') {
-            link.classList.add('active');
-        } else {
-            link.classList.remove('active');
-        }
-    });
-});
-
-// ========== HEADER SCROLL EFFECTS ==========
-const topBar = document.querySelector('.top-bar');
-const navbar = document.querySelector('.navbar');
-
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    // Hide top bar on scroll
-    if (currentScroll > 50) {
-        topBar.classList.add('hidden');
-    } else {
-        topBar.classList.remove('hidden');
+    // Traverse up to find data-section attribute
+    while (target && target !== document) {
+        sectionId = target.getAttribute('data-section');
+        if (sectionId) break;
+        target = target.parentElement;
     }
-    
-    // Add shadow to navbar
-    if (currentScroll > 100) {
+
+    if (sectionId) {
+        e.preventDefault();
+        showSection(sectionId);
+    }
+});
+
+// Navbar scroll effect
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    const currentScroll = window.pageYOffset;
+
+    if (currentScroll > 50) {
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.remove('scrolled');
     }
+
+    lastScroll = currentScroll;
 });
 
-// ========== PRODUCT CATEGORY FILTER ==========
-const categoryButtons = document.querySelectorAll('.category-btn');
+// Hamburger menu toggle
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('navMenu');
+
+hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+});
+
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+    }
+});
+
+// Mobile dropdown toggle
+const dropdown = document.querySelector('.dropdown > .nav-link');
+if (dropdown && window.innerWidth <= 968) {
+    dropdown.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const dropdownParent = dropdown.parentElement;
+        dropdownParent.classList.toggle('active');
+    });
+}
+
+// Product filtering with enhanced animations
+const filterBtns = document.querySelectorAll('.filter-btn');
 const productCards = document.querySelectorAll('.product-card');
 
-categoryButtons.forEach(button => {
-    button.addEventListener('click', () => {
+filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
         // Remove active class from all buttons
-        categoryButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-        
-        const category = button.getAttribute('data-category');
-        
-        // Filter products
-        productCards.forEach(card => {
-            const cardCategory = card.getAttribute('data-category');
-            
-            if (category === 'all' || cardCategory === category) {
-                card.classList.remove('hidden');
-                card.style.opacity = '0';
+        filterBtns.forEach(b => b.classList.remove('active'));
+        // Add active class to clicked button
+        btn.classList.add('active');
+
+        const filter = btn.getAttribute('data-filter');
+
+        productCards.forEach((card, index) => {
+            const category = card.getAttribute('data-category');
+
+            if (filter === 'all' || category === filter) {
+                card.classList.remove('hide');
+                card.style.animation = 'none';
                 setTimeout(() => {
-                    card.style.transition = 'opacity 0.4s ease';
-                    card.style.opacity = '1';
+                    card.style.animation = `fadeInUp 0.6s ease forwards ${index * 0.1}s`;
                 }, 10);
             } else {
-                card.style.opacity = '0';
-                setTimeout(() => {
-                    card.classList.add('hidden');
-                }, 300);
+                card.classList.add('hide');
             }
         });
     });
 });
 
-// Product category filter from dropdown menu
-document.querySelectorAll('.dropdown-menu a[data-category]').forEach(link => {
-    link.addEventListener('click', (e) => {
+// Handle dropdown product filter navigation
+document.querySelectorAll('.dropdown-content a[data-filter]').forEach(link => {
+    link.addEventListener('click', function (e) {
         e.preventDefault();
-        const category = link.getAttribute('data-category');
-        
-        // Show products section
+        e.stopPropagation();
+
+        // Get the filter value
+        const filter = this.getAttribute('data-filter');
+
+        // Navigate to products section
         showSection('products');
-        
-        // Filter products after a short delay
+
+        // Wait for section to be visible, then filter
         setTimeout(() => {
-            const targetButton = document.querySelector(`.category-btn[data-category="${category}"]`);
-            if (targetButton) {
-                targetButton.click();
+            const filterBtn = document.querySelector(`.filter-btn[data-filter="${filter}"]`);
+            if (filterBtn) {
+                filterBtn.click();
             }
         }, 300);
     });
 });
 
-// ========== MOBILE DROPDOWN TOGGLE ==========
-if (window.innerWidth <= 768) {
-    document.querySelectorAll('.dropdown > .nav-link').forEach(link => {
-        link.addEventListener('click', (e) => {
-            if (window.innerWidth <= 768) {
-                e.preventDefault();
-                const dropdown = link.parentElement;
-                dropdown.classList.toggle('active');
+// Hero product cards navigation with filtering
+document.querySelectorAll('.hero-product-card').forEach(card => {
+    card.addEventListener('click', function(e) {
+        e.preventDefault();
+        const filter = this.getAttribute('data-filter');
+        
+        // Navigate to products section
+        showSection('products');
+        
+        // Wait for section to be visible, then filter
+        setTimeout(() => {
+            if (filter && filter !== 'all') {
+                const filterBtn = document.querySelector(`.filter-btn[data-filter="${filter}"]`);
+                if (filterBtn) {
+                    filterBtn.click();
+                }
             }
-        });
+        }, 300);
     });
-}
+});
 
-// ========== SCROLL TO TOP BUTTON ==========
-const scrollTopBtn = document.getElementById('scrollTop');
+// Contact form submission
+const contactForm = document.getElementById('contactForm');
+
+contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(contactForm);
+    const data = Object.fromEntries(formData);
+
+    // Create WhatsApp message
+    const message = `
+*New Inquiry from Merava Global Website*
+
+*Name:* ${data.name}
+*Email:* ${data.email}
+*Phone:* ${data.phone}
+*Company:* ${data.company || 'Not specified'}
+*Product Interest:* ${data.product}
+
+*Message:*
+${data.message}
+    `.trim();
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/918087227973?text=${encodedMessage}`;
+
+    // Open WhatsApp
+    window.open(whatsappUrl, '_blank');
+
+    // Reset form
+    contactForm.reset();
+
+    // Show success message
+    alert('Thank you for your inquiry! Redirecting you to WhatsApp...');
+});
+
+// Back to top button
+const backToTop = document.getElementById('backToTop');
 
 window.addEventListener('scroll', () => {
     if (window.pageYOffset > 300) {
-        scrollTopBtn.classList.add('visible');
+        backToTop.classList.add('show');
     } else {
-        scrollTopBtn.classList.remove('visible');
+        backToTop.classList.remove('show');
     }
 });
 
-scrollTopBtn.addEventListener('click', () => {
+backToTop.addEventListener('click', () => {
     window.scrollTo({
         top: 0,
         behavior: 'smooth'
     });
 });
 
-// ========== CONTACT FORM SUBMISSION ==========
-const contactForm = document.getElementById('contactForm');
-
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    // Get form data
-    const formData = new FormData(contactForm);
-    const data = Object.fromEntries(formData);
-    
-    // Show loading state
-    const submitBtn = contactForm.querySelector('.btn-submit');
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-    submitBtn.disabled = true;
-    
-    // Simulate form submission
-    setTimeout(() => {
-        // Show success message
-        alert('Thank you for your inquiry! We will get back to you soon.');
-        
-        // Reset form
-        contactForm.reset();
-        
-        // Reset button
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-        
-        // In production, send data to server
-        console.log('Form submitted with data:', data);
-    }, 1500);
-});
-
-// ========== FORM INPUT ANIMATIONS ==========
-const formInputs = document.querySelectorAll('.form-group input, .form-group textarea, .form-group select');
-
-formInputs.forEach(input => {
-    // Add placeholder for label animation
-    if (!input.hasAttribute('placeholder')) {
-        input.setAttribute('placeholder', ' ');
-    }
-    
-    // Focus effects
-    input.addEventListener('focus', function() {
-        this.parentElement.style.transform = 'scale(1.02)';
-    });
-    
-    input.addEventListener('blur', function() {
-        this.parentElement.style.transform = 'scale(1)';
-    });
-});
-
-// ========== SMOOTH HOVER EFFECTS FOR CARDS ==========
-// Product cards hover
-productCards.forEach(card => {
-    card.addEventListener('mouseenter', () => {
-        card.style.transform = 'translateY(-10px)';
-        card.style.boxShadow = '0 20px 60px rgba(0, 0, 0, 0.3)';
-    });
-    
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = 'translateY(0)';
-        card.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-    });
-});
-
-// Info cards hover
-document.querySelectorAll('.info-card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-        card.style.transform = 'translateX(10px)';
-    });
-    
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = 'translateX(0)';
-    });
-});
-
-// Highlight cards hover
-document.querySelectorAll('.highlight-card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-        card.style.transform = 'translateX(10px)';
-    });
-    
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = 'translateX(0)';
-    });
-});
-
-// Detail cards hover
-document.querySelectorAll('.detail-card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-        card.style.transform = 'translateY(-5px)';
-    });
-    
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = 'translateY(0)';
-    });
-});
-
-// ========== BUTTON HOVER EFFECTS ==========
-const buttons = document.querySelectorAll('.btn, .category-btn');
-
-buttons.forEach(button => {
-    button.addEventListener('mouseenter', () => {
-        button.style.transform = 'translateY(-2px) scale(1.02)';
-    });
-    
-    button.addEventListener('mouseleave', () => {
-        button.style.transform = 'translateY(0) scale(1)';
-    });
-});
-
-// ========== INTERSECTION OBSERVER FOR FADE-IN ANIMATIONS ==========
+// Intersection Observer for scroll animations
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
 };
 
-const fadeInObserver = new IntersectionObserver((entries) => {
+const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+            entry.target.classList.add('animated');
         }
     });
 }, observerOptions);
 
-// Observe elements for fade-in animation
-document.querySelectorAll('.section-header, .about-grid, .founder-card, .company-details').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-    fadeInObserver.observe(el);
+// Observe elements when they enter viewport
+document.querySelectorAll('.about-image, .about-text, .about-feature-item, .founder-card, .detail-card, .contact-card').forEach(el => {
+    observer.observe(el);
 });
 
-// ========== WINDOW RESIZE HANDLER ==========
-let resizeTimeout;
-window.addEventListener('resize', () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-        // Reset mobile menu on resize to desktop
-        if (window.innerWidth > 768) {
-            navMenu.classList.remove('active');
-            mobileToggle.classList.remove('active');
-            
-            // Reset dropdown displays
-            document.querySelectorAll('.dropdown').forEach(dropdown => {
-                dropdown.classList.remove('active');
+// Add stagger animation to product cards on section load
+const productsSection = document.getElementById('products');
+const productObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const cards = entry.target.querySelectorAll('.product-card:not(.hide)');
+            cards.forEach((card, index) => {
+                card.style.animation = `fadeInUp 0.6s ease forwards ${index * 0.1}s`;
             });
-        }
-    }, 250);
-});
-
-// ========== ACCESSIBILITY: KEYBOARD NAVIGATION ==========
-buttons.forEach(button => {
-    button.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            button.click();
+            productObserver.unobserve(entry.target);
         }
     });
-});
+}, { threshold: 0.2 });
 
-// ========== PREVENT FORM RESUBMISSION ==========
-if (window.history.replaceState) {
-    window.history.replaceState(null, null, window.location.href);
+if (productsSection) {
+    productObserver.observe(productsSection);
 }
 
-// ========== PAGE LOAD ANIMATION ==========
-window.addEventListener('load', () => {
-    document.body.style.opacity = '1';
-    
-    // Animate hero elements on page load
-    const heroElements = document.querySelectorAll('.hero-logo, .hero-title, .hero-divider, .hero-subtitle, .hero-description, .hero-buttons, .hero-features');
-    
-    heroElements.forEach((el, index) => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        
-        setTimeout(() => {
-            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-            el.style.opacity = '1';
-            el.style.transform = 'translateY(0)';
-        }, 100 * (index + 1));
-    });
-});
+// Enhanced mobile experience
+let touchStartY = 0;
+let touchEndY = 0;
 
-// Set initial body opacity
-document.body.style.opacity = '0';
-document.body.style.transition = 'opacity 0.5s ease';
-
-// ========== CONSOLE BRANDING ==========
-console.log('%c🌾 Merava Global', 'font-size: 24px; font-weight: bold; color: #c9a961; font-family: Playfair Display;');
-console.log('%cPremium Agricultural Exports from Kolhapur', 'font-size: 14px; color: #1a2540; font-weight: 600;');
-console.log('%cWebsite: www.meravaglobal.com', 'font-size: 12px; color: #666;');
-console.log('%c✨ Crafted with excellence for global trade', 'font-size: 11px; color: #999; font-style: italic;');
-
-// ========== SMOOTH SCROLL FOR ALL ANCHOR LINKS ==========
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (href && href !== '#') {
-            const targetId = href.substring(1);
-            const targetSection = document.getElementById(targetId);
-            
-            if (targetSection) {
-                e.preventDefault();
-                showSection(targetId);
-            }
-        }
-    });
-});
-
-// ========== DEBOUNCED SCROLL HANDLER ==========
-let ticking = false;
-let lastKnownScrollPosition = 0;
-
-function doSomething(scrollPos) {
-    // Scroll-dependent operations
-    if (scrollPos > 300) {
-        scrollTopBtn.classList.add('visible');
-    } else {
-        scrollTopBtn.classList.remove('visible');
-    }
-}
-
-window.addEventListener('scroll', () => {
-    lastKnownScrollPosition = window.scrollY;
-
-    if (!ticking) {
-        window.requestAnimationFrame(() => {
-            doSomething(lastKnownScrollPosition);
-            ticking = false;
-        });
-
-        ticking = true;
-    }
+document.addEventListener('touchstart', (e) => {
+    touchStartY = e.changedTouches[0].screenY;
 }, { passive: true });
+
+document.addEventListener('touchend', (e) => {
+    touchEndY = e.changedTouches[0].screenY;
+    handleSwipe();
+}, { passive: true });
+
+function handleSwipe() {
+    const swipeDistance = touchStartY - touchEndY;
+    const swipeThreshold = 100;
+
+    // Optional: Add custom swipe behavior
+    if (Math.abs(swipeDistance) > swipeThreshold) {
+        // Swipe detected
+    }
+}
+
+// Performance optimization: Debounce scroll events
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Fix iOS viewport height issue
+function setVH() {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+setVH();
+window.addEventListener('resize', debounce(setVH, 250));
+
+// Preload critical images
+window.addEventListener('load', () => {
+    const images = document.querySelectorAll('img[loading="lazy"]');
+    const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                }
+                imageObserver.unobserve(img);
+            }
+        });
+    });
+
+    images.forEach(img => imageObserver.observe(img));
+});
+
+// Keyboard navigation support
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        // Close mobile menu
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+    }
+});
+
+// Add keyboard support for hamburger
+hamburger.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        hamburger.click();
+    }
+});
+
+// Smooth scroll polyfill for older browsers
+if (!('scrollBehavior' in document.documentElement.style)) {
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js';
+    document.head.appendChild(script);
+}
+
+// Handle browser back/forward buttons
+window.addEventListener('popstate', (e) => {
+    const hash = window.location.hash.slice(1) || 'home';
+    showSection(hash);
+});
+
+// Update URL hash when section changes (optional)
+function updateURL(sectionId) {
+    if (history.pushState) {
+        history.pushState(null, null, `#${sectionId}`);
+    } else {
+        window.location.hash = sectionId;
+    }
+}
+
+// Enhanced section navigation with URL update
+const originalShowSection = showSection;
+showSection = function (sectionId) {
+    originalShowSection(sectionId);
+    updateURL(sectionId);
+};
+
+// Initialize: Show correct section based on URL hash
+window.addEventListener('DOMContentLoaded', () => {
+    const hash = window.location.hash.slice(1);
+    if (hash && ['home', 'about', 'certifications','products', 'contact'].includes(hash)) {
+        showSection(hash);
+    } else {
+        showSection('home');
+    }
+});
+
+// Add ripple effect to buttons (optional enhancement)
+document.querySelectorAll('.btn, .filter-btn, .btn-enquire').forEach(button => {
+    button.addEventListener('click', function (e) {
+        const ripple = document.createElement('span');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        ripple.classList.add('ripple');
+
+        this.appendChild(ripple);
+
+        setTimeout(() => ripple.remove(), 600);
+    });
+});
+
+// Console welcome message
+console.log('%c🌾 Merava Global', 'font-size: 20px; font-weight: bold; color: #c9a961;');
+console.log('%cPremium Agricultural Exports from Kolhapur', 'font-size: 14px; color: #1a2540;');
+console.log('%cwww.meravaglobal.com', 'font-size: 12px; color: #666;');
+
