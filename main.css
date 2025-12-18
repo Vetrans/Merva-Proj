@@ -1559,6 +1559,68 @@ body {
     font-size: 14px;
 }
 
+/* QR Code in Footer */
+.qr-code-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Changed from center to flex-start */
+    padding: 20px 0;
+}
+
+.qr-code-image {
+    width: 180px;
+    height: 180px;
+    border-radius: 15px;
+    background: var(--white);
+    padding: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    transition: var(--transition);
+    object-fit: contain;
+}
+
+.qr-code-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 35px rgba(212, 175, 55, 0.5);
+}
+
+.qr-code-text {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 15px;
+    text-align: center;
+    letter-spacing: 0.5px;
+    width: 180px; /* Match QR code width */
+    align-self: flex-start; /* Align with QR code */
+}
+
+/* Responsive adjustments for QR Code */
+@media (max-width: 768px) {
+    .qr-code-image {
+        width: 160px;
+        height: 160px;
+    }
+    
+    .qr-code-text {
+        font-size: 13px;
+        width: 160px; /* Match responsive QR code width */
+    }
+}
+
+@media (max-width: 480px) {
+    .qr-code-image {
+        width: 140px;
+        height: 140px;
+        padding: 10px;
+    }
+    
+    .qr-code-text {
+        font-size: 12px;
+        margin-top: 12px;
+        width: 140px; /* Match responsive QR code width */
+    }
+}
+
 /* Back to Top Button */
 .back-to-top {
     position: fixed;
