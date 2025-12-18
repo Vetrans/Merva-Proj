@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description"
     content="Merava Global - Premium Agricultural Exports from Kolhapur. Quality Jaggery, Fresh Produce, Rice, Grains & Spices. Direct from farmers to global markets.">
@@ -19,7 +20,19 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <!-- GSAP -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-
+<!-- Google Translate -->
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            includedLanguages: 'af,sq,am,ar,hy,az,eu,be,bn,bs,bg,ca,ceb,zh-CN,zh-TW,co,hr,cs,da,nl,en,eo,et,fi,fr,fy,gl,ka,de,el,gu,ht,ha,haw,he,hi,hmn,hu,is,ig,id,ga,it,ja,jv,kn,kk,km,rw,ko,ku,ky,lo,la,lv,lt,lb,mk,mg,ms,ml,mt,mi,mr,mn,my,ne,no,ny,or,ps,fa,pl,pt,pa,ro,ru,sm,gd,sr,st,sn,sd,si,sk,sl,so,es,su,sw,sv,tl,tg,ta,tt,te,th,tr,tk,uk,ur,ug,uz,vi,cy,xh,yi,yo,zu',
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+            autoDisplay: false,
+            multilanguagePage: true
+        }, 'google_translate_element');
+    }
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <!-- AOS -->
 <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
 
@@ -78,24 +91,28 @@
         </div>
     </div>
 
-    <!-- Top Bar -->
-    <div class="top-bar">
-        <div class="container">
-            <div class="top-bar-content">
-                <div class="contact-info">
-                    <a href="tel:+918087227973" aria-label="Call us at +91 8087227973"><i class="fas fa-phone"></i> +91
-                        8087227973</a>
-                    <a href="tel:+919156417595" aria-label="Call us at +91 9156417595"><i class="fas fa-phone"></i> +91
-                        9156417595</a>
-                    <a href="mailto:info@meravaglobal.com" aria-label="Email us"><i class="fas fa-envelope"></i>
-                        info@meravaglobal.com</a>
-                </div>
+   <!-- Top Bar -->
+<div class="top-bar">
+    <div class="container">
+        <div class="top-bar-content">
+            <div class="contact-info">
+                <a href="tel:+918087227973" aria-label="Call us at +91 8087227973"><i class="fas fa-phone"></i> +91
+                    8087227973</a>
+                <a href="tel:+919156417595" aria-label="Call us at +91 9156417595"><i class="fas fa-phone"></i> +91
+                    9156417595</a>
+                <a href="mailto:info@meravaglobal.com" aria-label="Email us"><i class="fas fa-envelope"></i>
+                    info@meravaglobal.com</a>
+            </div>
+            <div class="top-bar-right">
+                <div id="google_translate_element"></div>
                 <div class="social-links">
                     <a href="https://wa.me/918087227973?text=Hello%20Merava%20Global,%20I%20came%20across%20your%20website%20and%20would%20like%20to%20connect%20regarding%20your%20products%20and%20services."
                         target="_blank"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
         <!-- Navigation -->
         <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
