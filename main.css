@@ -810,7 +810,7 @@ body {
 .about-badge {
     position: absolute;
     bottom: 25px;
-    right: 25px;
+    right: 9px;
     background: var(--white);
     padding: 25px 30px;
     border-radius: 15px;
